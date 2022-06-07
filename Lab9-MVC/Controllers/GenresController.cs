@@ -8,119 +8,112 @@ using System.Web;
 using System.Web.Mvc;
 using Lab9_MVC.Models;
 
-namespace Lab9_MVC.Controllers
+namespace MVC.Controllers
 {
-    public class SongsController : Controller
+    public class GenresController : Controller
     {
         private MusicDbContext db = new MusicDbContext();
-                
 
-        // GET: Songs
+        // GET: Genres
         public ActionResult Index()
         {
             if (Request.IsAjaxRequest())
-                return PartialView("_SongsList", db.Songs.ToList());
+                return PartialView("_GenresList", db.Genres.ToList());
             else
-                return View(db.Songs.ToList());
+                return View(db.Genres.ToList());
         }
 
-        // GET: Songs/Details/5
-        /*public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Song song = db.Songs.Find(id);
-            if (song == null)
-            {
-                return HttpNotFound();
-            }
-            return View(song);
-        }*/
+        // GET: Genres/Details/5
+        /* public ActionResult Details(int? id)
+         {
+             if (id == null)
+             {
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }
+             Genre genre = db.Genres.Find(id);
+             if (genre == null)
+             {
+                 return HttpNotFound();
+             }
+             return View(genre);
+         }*/
 
-        // GET: Songs/Create
+        // GET: Genres/Create
         public ActionResult Create()
         {
-            ViewBag.Genres = db.Genres.ToList();
             return View();
         }
 
-        // POST: Songs/Create
+        // POST: Genres/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Artist,GenreId")] Song song)
+        public ActionResult Create([Bind(Include = "Id,Name")] Genre genre)
         {
             if (ModelState.IsValid)
             {
-                db.Songs.Add(song);
+                db.Genres.Add(genre);
                 db.SaveChanges();
-                ViewBag.Genres = db.Genres.ToList();
-
                 return RedirectToAction("Index");
             }
 
-            return View(song);
+            return View(genre);
         }
 
-        // GET: Songs/Edit/5
+        // GET: Genres/Edit/5
         public ActionResult Edit(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Song song = db.Songs.Find(id);
-            if (song == null)
+            Genre genre = db.Genres.Find(id);
+            if (genre == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Genres = db.Genres.ToList();
-            return View(song);
+            return View(genre);
         }
 
-        // POST: Songs/Edit/5
+        // POST: Genres/Edit/5
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Artist,GenreId")] Song song)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Genre genre)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(song).State = EntityState.Modified;
+                db.Entry(genre).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Genres = db.Genres.ToList();
-            return View(song);
+            return View(genre);
         }
 
-        // GET: Songs/Delete/5
-        /*public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Song song = db.Songs.Find(id);
-            if (song == null)
-            {
-                return HttpNotFound();
-            }
-            return View(song);
-        }*/
+        // GET: Genres/Delete/5
+        /* public ActionResult Delete(int? id)
+         {
+             if (id == null)
+             {
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }
+             Genre genre = db.Genres.Find(id);
+             if (genre == null)
+             {
+                 return HttpNotFound();
+             }
+             return View(genre);
+         }*/
 
-        // POST: Songs/Delete/5
+        // POST: Genres/Delete/5
         [HttpDelete, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            Song song = db.Songs.Find(id);
-            db.Songs.Remove(song);
+            Genre genre = db.Genres.Find(id);
+            db.Genres.Remove(genre);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

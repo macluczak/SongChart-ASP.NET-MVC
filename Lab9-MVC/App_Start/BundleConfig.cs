@@ -12,7 +12,8 @@ namespace Lab9_MVC
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+ "~/Scripts/jquery.unobtrusive*",
+ "~/Scripts/jquery.validate*"));
 
             // Użyj wersji deweloperskiej biblioteki Modernizr do nauki i opracowywania rozwiązań. Następnie, kiedy wszystko będzie
             // gotowe do produkcji, użyj narzędzia do kompilowania ze strony https://modernizr.com, aby wybrać wyłącznie potrzebne testy.
@@ -25,6 +26,11 @@ namespace Lab9_MVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+        
+
+
         }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Lab9_MVC.Models.Song>
+﻿@model IEnumerable<Lab9_MVC.Models.Genre>
 
 @{
     ViewBag.Title = "Index";
@@ -9,4 +9,6 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@Html.Partial("_SongList", Model)
+
+
+@Html.Partial("_GenresList", Model)
